@@ -14,40 +14,25 @@ class TagParserTest extends TestCase
     }
 
     /**
-     * @test
+     * @param $input
+     * @param $expected
+     * @dataProvider tagsProvider
      */
-    public function it_parses_a_single_tag()
+    public function test_it_parses_tags($input, $expected)
     {
-        $tags = $this->parser->parse('bread');
-        $expected_tags = ['bread'];
+        $tags = $this->parser->parse($input);
 
-        $this->assertSame($expected_tags, $tags);
+        $this->assertSame($expected, $tags);
     }
 
-    /**
-     * @test
-     */
-    public function it_parse_a_comma_separated_list_tags()
+    public function tagsProvider()
     {
-        $tags = $this->parser->parse('bread, milk, meat');
-        $expected_tags = ['bread', 'milk', 'meat'];
-
-        $this->assertSame($expected_tags, $tags);
-
-        $tags = $this->parser->parse('bread,milk,meat');
-        $expected_tags = ['bread', 'milk', 'meat'];
-
-        $this->assertSame($expected_tags, $tags);
-    }
-
-    /**
-     * @test
-     */
-    public function it_parse_a_pipe_separated_list_tags()
-    {
-        $tags = $this->parser->parse('bread | milk | meat');
-        $expected_tags = ['bread', 'milk', 'meat'];
-
-        $this->assertSame($expected_tags, $tags);
+        return [
+            ['bread', ['bread']],
+            ['bread, milk, meat', ['bread', 'milk', 'meat']],
+            ['bread,milk,meat', ['bread', 'milk', 'meat']],
+            ['bread | milk | meat', ['bread', 'milk', 'meat']],
+            ['bread|milk|meat', ['bread', 'milk', 'meat']],
+        ];
     }
 }
