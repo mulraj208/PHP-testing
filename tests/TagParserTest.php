@@ -6,26 +6,46 @@ use PHPUnit\Framework\TestCase;
 
 class TagParserTest extends TestCase
 {
-    public function test_it_parse_a_comma_separated_list_tags()
-    {
-        $parser = new TagParser;
+    protected $parser;
 
-        $tags = $parser->parse('bread, milk, meat');
+    protected function setUp(): void
+    {
+        $this->parser = new TagParser();
+    }
+
+    /**
+     * @test
+     */
+    public function it_parses_a_single_tag()
+    {
+        $tags = $this->parser->parse('bread');
+        $expected_tags = ['bread'];
+
+        $this->assertSame($expected_tags, $tags);
+    }
+
+    /**
+     * @test
+     */
+    public function it_parse_a_comma_separated_list_tags()
+    {
+        $tags = $this->parser->parse('bread, milk, meat');
         $expected_tags = ['bread', 'milk', 'meat'];
 
         $this->assertSame($expected_tags, $tags);
 
-        $tags = $parser->parse('bread,milk,meat');
+        $tags = $this->parser->parse('bread,milk,meat');
         $expected_tags = ['bread', 'milk', 'meat'];
 
         $this->assertSame($expected_tags, $tags);
     }
 
-    public function test_it_parse_a_pipe_separated_list_tags()
+    /**
+     * @test
+     */
+    public function it_parse_a_pipe_separated_list_tags()
     {
-        $parser = new TagParser;
-
-        $tags = $parser->parse('bread | milk | meat');
+        $tags = $this->parser->parse('bread | milk | meat');
         $expected_tags = ['bread', 'milk', 'meat'];
 
         $this->assertSame($expected_tags, $tags);
