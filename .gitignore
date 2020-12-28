@@ -1,7 +1,4 @@
-.idea/.gitignore
-.idea/misc.xml
-.idea/modules.xml
-.idea/php-testing.iml
+.idea/*
 .phpunit.result.cache
 composer.json
 composer.lock
