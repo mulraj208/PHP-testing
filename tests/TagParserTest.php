@@ -28,11 +28,11 @@ class TagParserTest extends TestCase
     public function tagsProvider()
     {
         return [
-            ['bread', ['bread']],
-            ['bread, milk, meat', ['bread', 'milk', 'meat']],
-            ['bread,milk,meat', ['bread', 'milk', 'meat']],
-            ['bread | milk | meat', ['bread', 'milk', 'meat']],
-            ['bread|milk|meat', ['bread', 'milk', 'meat']],
+            'single_tag' => ['bread', ['bread']],
+            'tags_with_comma' => ['bread, milk, meat', ['bread', 'milk', 'meat']],
+            'tags_with_comma_and_no_spaces' => ['bread,milk,meat', ['bread', 'milk', 'meat']],
+            'tags_with_pipe' => ['bread | milk | meat', ['bread', 'milk', 'meat']],
+            'tags_with_pipe_and_no_spaces' => ['bread|milk|meat', ['bread', 'milk', 'meat']],
         ];
     }
 }
